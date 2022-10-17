@@ -6,11 +6,92 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <%= link_to "Bookers", root_path, class:"navbar-brand" %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse show" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li>
+              <%= link_to books_path, class: 'nav-link text-light', method: :get do  %>
+              <i class="fas fa-home", aria-hidden="true"></i>
+              Home
+              <% end %>
+            </li>
+            <li>
+              <%= link_to user_path(id: current_user), class: 'nav-link text-light', method: :get do  %>
+              <i class="fas fa-users", aria-hidden="true"></i>
+              Users
+              <% end %>
+            </li>
+            <li>
+              <%= link_to books_path, class: 'nav-link text-light', method: :get do  %>
+              <i class="fas fa-book-open", aria-hidden="true"></i>
+              Books
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, class: 'nav-link text-light', method: :delete do %>
+              <i class="fas fa-sign-out-alt", aria-hidden="true"></i>
+              Log out
+              <% end %>
+            </li>
+
+            <% else %>
+            <li>
+              <%= link_to root_path, class: 'nav-link text-light', method: :get do  %>
+              <i class="fas fa-home", aria-hidden="true"></i>
+              Home
+              <% end %>
+            </li>
+            <li>
+              <%= link_to about_path, class: 'nav-link text-light', method: :get do  %>
+              <i class="fas fa-link", aria-hidden="true"></i>
+              About
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_registration_path, class: 'nav-link text-light', method: :get do  %>
+              <i class="fas fa-user-plus", aria-hidden="true"></i>
+              Sign up
+              <% end %>
+            </li>
+            <li>
+              <%= link_to user_session_path, class: 'nav-link text-light', method: :get do  %>
+              <i class="fas fa-sign-in-alt", aria-hidden="true"></i>
+              Log in
+              <% end %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+     <%= yield %>
+    </main>
+
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>
