@@ -11,17 +11,18 @@
   </head>
 
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <div class="container">
           <%= link_to "Bookers", root_path, class:"navbar-brand" %>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse show" id="navbarNavDropdown">
-          <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
             <li>
               <%= link_to user_path(id: current_user), class: 'nav-link text-light', method: :get do  %>
               <i class="fas fa-home", aria-hidden="true"></i>
@@ -73,14 +74,16 @@
               <% end %>
             </li>
             <% end %>
-          </ul>
-        </div>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
 
+
+
     <main>
-     <%= yield %>
+      <%= yield %>
     </main>
 
     <footer>
