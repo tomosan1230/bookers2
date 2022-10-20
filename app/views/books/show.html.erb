@@ -1,4 +1,70 @@
-<%= render 'book', books: @books, user: @user, book: @book %>
+<p id="notice">
+  <%= flash[:notice] %>
+</p>
+<% if @book.errors.any? %>
+  <div id="error_explanation">
+    <h3><%= @book.errors.count %>errors prohibited this book from being saved:</h3>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+  </div>
+<% end %>
+
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+
+      <h2>User info</h2>
+      <%= image_tag @boo.user.get_profile_image(100,100) %>
+      <table class="table">
+        <tbody>
+          <tr></tr>
+            <tr>
+              <th>name</th>
+              <th><%= @boo.user.name %></th>
+            </tr>
+            <tr>
+              <th>introduction</th>
+              <th><%= @boo.user.introduction %></th>
+            </tr>
+        </tbody>
+      </table>
+      <div class="row">
+
+        <%= link_to edit_user_path(@boo.user.id), class: 'btn btn-outline-secondary btn-block', method: :get do %>
+        <i class="fas fa-user-cog", aria-hidden="true"></i>
+        <% end %>
+      </div>
+      <h2 class="mt-3">New book</h2>
+
+
+      <%= form_with model: @book do |f| %>
+
+      <div class="form-group">
+        <div class="field_with_errors">
+          <label for="book_title">Title</label>
+        </div>
+        <div class="field_with_errors">
+          <%= f.text_field :title, class: 'form-control book_title' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="field_with_errors">
+          <label for="book_title">Opinion</label>
+        </div>
+        <div class="field_with_errors">
+          <%= f.text_area :body, class: 'form-control book_body' %>
+      </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit  'Create Book', class: 'btn btn-success' %>
+      </div>
+      <% end %>
+    </div>
 
     <!--右側-->
     <div>
@@ -7,8 +73,11 @@
         <table class="table">
           <tbody>
             <tr>
-              <td><%= image_tag @boo.user.get_profile_image(100,86) %><br>
-              <%= link_to @boo.user.name, user_path(@user.id) %>
+
+              <td>
+                <%= link_to image_tag(@boo.user.get_profile_image(80,80)), user_path(@boo.user.id) %>
+                <br>
+                <%= link_to @boo.user.name, user_path(@boo.user.id) %>
               </td>
               <td>
                 <%= link_to @boo.title, book_path %>
