@@ -7,17 +7,17 @@
     <div class="col-md-3">
 
       <h2>User info</h2>
-      <%= image_tag current_user.get_profile_image(100,100) %>
+      <%= image_tag @user.get_profile_image(100,100) %>
       <table class="table">
         <tbody>
           <tr></tr>
             <tr>
               <th>name</th>
-              <th><%= current_user.name %></th>
+              <th><%= @user.name %></th>
             </tr>
             <tr>
               <th>introduction</th>
-              <th><%= current_user.introduction %></th>
+              <th><%= @user.introduction %></th>
             </tr>
         </tbody>
       </table>
@@ -79,7 +79,11 @@
           <tbody>
           <% @books.each do |book| %>
             <tr>
-              <td><%= image_tag book.user.get_profile_image(80,80) %></td>
+              <td>
+                <%= link_to user_path(book.user.id) do %>
+                  <%= image_tag book.user.get_profile_image(80,80) %>
+                <% end %>
+              </td>
               <td><%= link_to book.title, book_path(book) %></td>
               <td><%= book.body %></td>
             </tr>
